@@ -1,0 +1,29 @@
+{
+  "name": "crud-sqlite",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node main.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/yunanelfath/crud-sqlite.git"
+  },
+  "keywords": [
+    "simple",
+    "app"
+  ],
+  "author": "Yunan KF",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yunanelfath/crud-sqlite/issues"
+  },
+  "homepage": "https://github.com/yunanelfath/crud-sqlite#readme",
+  "dependencies": {
+    "bluebird": "^3.7.1",
+    "express": "^4.17.1",
+    "sqlite3": "^4.1.0"
+  }
+}
