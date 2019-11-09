@@ -1,8 +1,10 @@
 // position_repository.js
+const AppDBO = require('../../db')
+const config = require('../../config')
 
-class PositionRepository {
-  constructor(dao) {
-    this.dao = dao
+class PositionRepository extends AppDBO  {
+  constructor(db=config.db) {
+    super(db)
   }
 
   createTable() {
@@ -15,7 +17,7 @@ class PositionRepository {
         longitude varchar(255),
         tracked_at datetime
       )`
-    return this.dao.run(sql)
+    return super.run(sql)
   }
 }
 
