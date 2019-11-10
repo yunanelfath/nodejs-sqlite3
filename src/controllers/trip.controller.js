@@ -32,8 +32,8 @@ let controller = {
     tripModel.create({fields, values})
     return values
   },
-  get: function(){
-    let data = tripModel.get()
+  get: async function(){
+    let data = await tripModel.all()
     console.log(data)
     return data
   },

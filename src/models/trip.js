@@ -29,8 +29,11 @@ class TripRepository extends AppDBO {
     return super.run(
       `INSERT INTO trips (${fields}) VALUES ${values}`)
   }
-  get(){
-    return super.run(`select * from trips`)
+  get(id){
+    return super.get(`select * from trips where id = ?`,[id])
+  }
+  all(){
+    return super.all(`select * from trips order by id desc`)
   }
 }
 
