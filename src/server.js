@@ -10,7 +10,8 @@ class StartServer{
     const app = express();
 
     // app.get('/', (req, res) => res.send('Hello world'))
-    app.get('/', tripController.hello)
+    app.get('/', tripController.getListTrip)
+    app.get('/export', tripController.hello)
 
     app.listen(this.port, err => {
       if (err) {

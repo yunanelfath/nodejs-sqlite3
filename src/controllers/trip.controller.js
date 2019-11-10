@@ -60,6 +60,33 @@ let controller = {
     let data = await tripModel.all()
     return data
   },
+  getListTrip: async function(req, res){
+    let data = await tripModel.all()
+    let table = '<table> \
+      <thead> \
+        <th>Start Datetime</th><th>End Datetime</th><th>Locations</th><th>Action</th>\
+      </thead>\
+      <tbody>'
+      for(let i=0;i<data.length;i++){
+        table += `<tr>\
+        <td>${data[i].start}</td><td>${data[i].end}</td><td>${data[i].average_speed}</td>\
+        <td><a href="/export/${data[i].id}">export to csv</a></td>\
+        </tr>`
+      }
+      table += '</tbody>\
+    </table>'
+    let header = ''
+    let body = table
+    let html = '<!DOCTYPE html>'
+       + '<html><head>' + header + '</head><body>' + body + '</body></html>';
+
+    res.writeHead(200, {
+      'Content-Type': 'text/html',
+      'Content-Length': html.length,
+      'Expires': new Date().toUTCString()
+    });
+    res.end(html);
+  },
   hello: async function(req, res){
     return res.send('hello world')
   }

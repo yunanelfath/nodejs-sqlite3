@@ -8,6 +8,7 @@ const PositionRepository = require('./src/models/position')
 const StartServer = require('./src/server')
 const path = require('path')
 const config = require('./config')
+const opn = require('opn')
 
 function main() {
 
@@ -22,6 +23,7 @@ function main() {
     .then(() => TripController.dumpRecord(config.data))
     .then(() => TripController.get())
     .then(() => server.start())
+    .then(() => opn(`http://localhost:${port}`))
     .catch((err) => {
       console.log('Error: ')
       console.log(err)
