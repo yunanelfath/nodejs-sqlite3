@@ -3,6 +3,7 @@ const TripRepository = require('../models/trip')
 const PositionRepository = require('../models/position')
 const tripModel = new TripRepository()
 const positionModel = new PositionRepository()
+const { ExportToCsv } = require('export-to-csv')
 
 let controller = {
   dumpRecord: function(importFile){
@@ -86,6 +87,33 @@ let controller = {
       'Expires': new Date().toUTCString()
     });
     res.end(html);
+  },
+  export: async function(req, res){
+    let data = await positionModel.getByTrip(req.params.id)
+    const options = {
+        fieldSeparator: ',',
+        quoteStrings: '"',
+        decimalSeparator: '.',
+        showLabels: true,
+        showTitle: true,
+        title: 'My Awesome CSV',
+        useTextFile: false,
+        useBom: true,
+        useKeysAsHeaders: true,
+        // headers: ['Column 1', 'Column 2', etc...] <-- Won't work with useKeysAsHeaders present!
+      };
+
+    const csvExporter = new ExportToCsv(options);
+
+    console.log(data)
+    try{
+      // csvExporter.generateCsv(data);
+
+      const csvData = csvExporter.generateCsv(data, true)
+      return fs.writeFileSync('data.csv',csvData)
+    }catch(e){
+      console.log(e)
+    }
   },
   hello: async function(req, res){
     return res.send('hello world')

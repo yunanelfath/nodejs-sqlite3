@@ -32,6 +32,9 @@ class PositionRepository extends AppDBO  {
   get(id){
     return super.get(`select * from positions where id = ?`,[id])
   }
+  getByTrip(id){
+    return super.all(`select id as ID, tracked_at as Datetime, latitude as Latitude, longitude as Longitude, speed as 'Speed(kmh)', distance as 'Distance(m)', voltage as Voltage from positions where trip_id = ?`,[id])
+  }
   all(){
     return super.all(`select * from positions order by id desc`)
   }

@@ -11,7 +11,7 @@ class StartServer{
 
     // app.get('/', (req, res) => res.send('Hello world'))
     app.get('/', tripController.getListTrip)
-    app.get('/export', tripController.hello)
+    app.get('/export/:id', tripController.export)
 
     app.listen(this.port, err => {
       if (err) {

@@ -23,6 +23,7 @@
   "homepage": "https://github.com/yunanelfath/crud-sqlite#readme",
   "dependencies": {
     "bluebird": "^3.7.1",
+    "export-to-csv": "^0.2.1",
     "express": "^4.17.1",
     "opn": "^6.0.0",
     "sqlite3": "^4.1.0"
