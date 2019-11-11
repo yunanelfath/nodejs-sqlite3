@@ -4,6 +4,7 @@ const PositionRepository = require('../models/position')
 const tripModel = new TripRepository()
 const positionModel = new PositionRepository()
 const { ExportToCsv } = require('export-to-csv')
+const path = require('path')
 
 let controller = {
   dumpRecord: function(importFile){
@@ -95,8 +96,7 @@ let controller = {
         quoteStrings: '"',
         decimalSeparator: '.',
         showLabels: true,
-        showTitle: true,
-        title: 'My Awesome CSV',
+        showTitle: false,
         useTextFile: false,
         useBom: true,
         useKeysAsHeaders: true,
@@ -105,12 +105,12 @@ let controller = {
 
     const csvExporter = new ExportToCsv(options);
 
-    console.log(data)
+    // console.log(data)
     try{
-      // csvExporter.generateCsv(data);
 
       const csvData = csvExporter.generateCsv(data, true)
-      return fs.writeFileSync('data.csv',csvData)
+      res.attachment('data.csv')
+      res.status(200).send(csvData)
     }catch(e){
       console.log(e)
     }
